@@ -113,6 +113,9 @@
   </div>
 
   <script>
+    // Set your admin password here
+    const PASSCODE = "VOLTRONTECH";
+
     let todayCode = JSON.parse(localStorage.getItem('mcCode')) || ["Apple", "Map", "Potion", "Sign"];
 
     function renderCode() {
@@ -128,11 +131,16 @@
     }
 
     function openAdmin() {
-      document.getElementById("icon1").value = todayCode[0] || "";
-      document.getElementById("icon2").value = todayCode[1] || "";
-      document.getElementById("icon3").value = todayCode[2] || "";
-      document.getElementById("icon4").value = todayCode[3] || "";
-      document.getElementById("admin-modal").style.display = "flex";
+      const inputPass = prompt("Enter Admin Passcode:");
+      if (inputPass === PASSCODE) {
+        document.getElementById("icon1").value = todayCode[0] || "";
+        document.getElementById("icon2").value = todayCode[1] || "";
+        document.getElementById("icon3").value = todayCode[2] || "";
+        document.getElementById("icon4").value = todayCode[3] || "";
+        document.getElementById("admin-modal").style.display = "flex";
+      } else if (inputPass !== null) {
+        alert("Incorrect passcode!");
+      }
     }
 
     function closeAdmin() {
