@@ -15,6 +15,7 @@
       justify-content: center;
       min-height: 100vh;
       margin: 0;
+      position: relative;
     }
     h1 {
       font-size: 2rem;
@@ -44,25 +45,113 @@
       object-fit: contain;
       image-rendering: pixelated;
     }
+    .admin-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #3a3a3a;
+      border: 2px solid #555;
+      color: white;
+      font-size: 1rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .admin-btn:hover { background: #555; }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #2a2a2a;
+      padding: 25px;
+      border-radius: 12px;
+      border: 2px solid #555;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 280px;
+    }
+    .modal-content input {
+      padding: 8px;
+      background: #1e1e1e;
+      border: 1px solid #4a4a4a;
+      color: white;
+      border-radius: 4px;
+    }
+    .modal-content button {
+      padding: 10px;
+      background: #388e3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
+  <button class="admin-btn" onclick="openAdmin()">⚙️ Admin</button>
   <h1>Today's Join Code</h1>
   <div class="code-container" id="join-code"></div>
 
-  <script>
-    // UPDATE THESE 4 NAMES TO MATCH YOUR PNG FILE NAMES EXACTLY!
-    const todayCode = ["apple", "book", "cookie", "water"];
+  <div class="modal" id="admin-modal">
+    <div class="modal-content">
+      <h2 style="margin:0 0 10px 0; font-size:1.2rem;">Update Join Code</h2>
+      <input type="text" id="icon1" placeholder="Icon 1 (e.g. Apple)">
+      <input type="text" id="icon2" placeholder="Icon 2 (e.g. Water Bucket)">
+      <input type="text" id="icon3" placeholder="Icon 3 (e.g. Iron Pickaxe)">
+      <input type="text" id="icon4" placeholder="Icon 4 (e.g. Book and Quill)">
+      <button onclick="saveCode()">Save Code</button>
+      <button onclick="closeAdmin()" style="background:#d32f2f;">Cancel</button>
+    </div>
+  </div>
 
-    const container = document.getElementById("join-code");
-    todayCode.forEach(iconName => {
-      container.innerHTML += `
-        <div class="card">
-          <img src="${iconName}.png" alt="${iconName}">
-        </div>
-      `;
-    });
+  <script>
+    let todayCode = JSON.parse(localStorage.getItem('mcCode')) || ["Apple", "Map", "Potion", "Sign"];
+
+    function renderCode() {
+      const container = document.getElementById("join-code");
+      container.innerHTML = "";
+      todayCode.forEach(iconName => {
+        container.innerHTML += `
+          <div class="card">
+            <img src="${iconName}.png" alt="${iconName}" onerror="this.onerror=null; this.src='Agent.png';">
+          </div>
+        `;
+      });
+    }
+
+    function openAdmin() {
+      document.getElementById("icon1").value = todayCode[0] || "";
+      document.getElementById("icon2").value = todayCode[1] || "";
+      document.getElementById("icon3").value = todayCode[2] || "";
+      document.getElementById("icon4").value = todayCode[3] || "";
+      document.getElementById("admin-modal").style.display = "flex";
+    }
+
+    function closeAdmin() {
+      document.getElementById("admin-modal").style.display = "none";
+    }
+
+    function saveCode() {
+      todayCode = [
+        document.getElementById("icon1").value.trim(),
+        document.getElementById("icon2").value.trim(),
+        document.getElementById("icon3").value.trim(),
+        document.getElementById("icon4").value.trim()
+      ];
+      localStorage.setItem('mcCode', JSON.stringify(todayCode));
+      renderCode();
+      closeAdmin();
+    }
+
+    renderCode();
   </script>
 
 </body>
