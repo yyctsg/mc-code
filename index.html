@@ -6,7 +6,7 @@
   <title>MINECRAFT JOIN CODE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -14,12 +14,12 @@
       padding: 0;
     }
     body {
-      background: #090d14;
+      background: #080c14;
       background-image: 
-        radial-gradient(circle at 50% 30%, rgba(32, 80, 50, 0.35) 0%, transparent 70%),
-        radial-gradient(circle at 80% 80%, rgba(15, 30, 50, 0.5) 0%, transparent 50%);
+        radial-gradient(circle at 50% 40%, rgba(30, 90, 50, 0.25) 0%, transparent 70%),
+        radial-gradient(circle at 50% 100%, rgba(10, 20, 35, 0.8) 0%, transparent 100%);
       color: #ffffff;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Press Start 2P', monospace;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -29,7 +29,8 @@
       position: relative;
       overflow-x: hidden;
     }
-    /* Dynamic pixel grid background */
+
+    /* Subtle Pixel Grid */
     body::before {
       content: "";
       position: absolute;
@@ -37,101 +38,87 @@
       background-image: 
         linear-gradient(rgba(85, 255, 85, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(85, 255, 85, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-size: 32px 32px;
       pointer-events: none;
     }
 
-    .header-container {
-      text-align: center;
-      margin-bottom: 40px;
-      z-index: 1;
-    }
-    .badge {
-      display: inline-block;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.65rem;
-      color: #55ff55;
-      background: rgba(85, 255, 85, 0.1);
-      border: 1px solid rgba(85, 255, 85, 0.3);
-      padding: 6px 14px;
-      border-radius: 20px;
-      margin-bottom: 16px;
-      letter-spacing: 1px;
-      box-shadow: 0 0 15px rgba(85, 255, 85, 0.15);
-    }
     h1 {
-      font-family: 'Press Start 2P', monospace;
-      font-size: clamp(1.2rem, 4.5vw, 2.2rem);
-      line-height: 1.4;
-      color: #ffffff;
-      text-shadow: 0 0 25px rgba(85, 255, 85, 0.3);
+      font-size: clamp(1.1rem, 4vw, 2rem);
+      line-height: 1.6;
+      text-align: center;
+      color: #55ff55;
+      text-shadow: 0 0 20px rgba(85, 255, 85, 0.4), 3px 3px 0px #00aa00;
+      margin-bottom: 40px;
       letter-spacing: 1px;
+      z-index: 1;
     }
 
     .code-container {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      max-width: 960px;
+      max-width: 900px;
       width: 100%;
       padding: 10px;
       z-index: 1;
     }
+
+    /* Refined Glass Cards */
     .card {
-      background: linear-gradient(145deg, rgba(20, 30, 24, 0.6), rgba(10, 16, 26, 0.7));
-      border: 1px solid rgba(85, 255, 85, 0.25);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 24px;
-      padding: 24px;
+      background: rgba(15, 23, 36, 0.45);
+      border: 2px solid rgba(85, 255, 85, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-      width: 150px;
-      height: 150px;
-      position: relative;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(85, 255, 85, 0.05);
+      transition: all 0.25s ease;
+      width: 140px;
+      height: 140px;
     }
+
     .card:hover {
-      transform: translateY(-8px) scale(1.04);
-      border-color: rgba(85, 255, 85, 0.7);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(85, 255, 85, 0.25);
+      transform: translateY(-6px);
+      border-color: #55ff55;
+      background: rgba(20, 32, 48, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(85, 255, 85, 0.3);
     }
+
     .card img {
-      width: 84px;
-      height: 84px;
+      width: 76px;
+      height: 76px;
       object-fit: contain;
       image-rendering: pixelated;
-      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.6));
+      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.7));
     }
 
     .admin-btn {
       position: absolute;
       top: 24px;
       right: 24px;
-      background: rgba(18, 25, 38, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #d0d7e0;
-      font-size: 0.85rem;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 14px;
+      background: rgba(15, 23, 36, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      color: #aaaaaa;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.65rem;
+      padding: 10px 14px;
+      border-radius: 10px;
       cursor: pointer;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       transition: all 0.2s ease;
       z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
+
     .admin-btn:hover {
-      background: rgba(85, 255, 85, 0.12);
+      background: rgba(85, 255, 85, 0.15);
       color: #55ff55;
-      border-color: rgba(85, 255, 85, 0.4);
-      box-shadow: 0 0 20px rgba(85, 255, 85, 0.2);
+      border-color: #55ff55;
+      box-shadow: 0 0 15px rgba(85, 255, 85, 0.3);
     }
 
     /* Modal Styling */
@@ -140,114 +127,122 @@
       position: fixed;
       inset: 0;
       background: rgba(4, 7, 12, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       align-items: center;
       justify-content: center;
       padding: 20px;
       z-index: 100;
     }
+
     .modal-content {
-      background: #0f1724;
-      padding: 32px;
-      border-radius: 24px;
-      border: 1px solid rgba(85, 255, 85, 0.2);
+      background: rgba(15, 23, 36, 0.95);
+      padding: 28px;
+      border-radius: 16px;
+      border: 2px solid rgba(85, 255, 85, 0.4);
       display: flex;
       flex-direction: column;
       gap: 16px;
       width: 100%;
       max-width: 360px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(85, 255, 85, 0.1);
-      animation: popIn 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(85, 255, 85, 0.2);
     }
-    @keyframes popIn {
-      from { transform: scale(0.92); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+
     .modal-header h2 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-    }
-    .modal-header p {
       font-size: 0.85rem;
-      color: #7e8b9b;
-      margin-top: 4px;
+      color: #55ff55;
+      line-height: 1.4;
+      text-transform: uppercase;
     }
+
+    .modal-header p {
+      font-size: 0.55rem;
+      color: #888888;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
     .input-group {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
+
     .modal-content input {
-      padding: 14px 16px;
-      background: #080c14;
-      border: 1px solid #1e293b;
+      padding: 12px;
+      background: rgba(5, 9, 15, 0.8);
+      border: 2px solid #1e293b;
       color: #ffffff;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 600;
+      border-radius: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.65rem;
       outline: none;
       transition: all 0.2s ease;
     }
+
     .modal-content input:focus {
       border-color: #55ff55;
-      box-shadow: 0 0 15px rgba(85, 255, 85, 0.2);
+      box-shadow: 0 0 12px rgba(85, 255, 85, 0.3);
     }
+
     .modal-actions {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       margin-top: 6px;
     }
+
     .btn-primary {
-      padding: 14px;
-      background: #22c55e;
-      color: #052e16;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 800;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-    }
-    .btn-primary:hover {
-      background: #4ade80;
-      box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
-    }
-    .btn-cancel {
       padding: 12px;
-      background: transparent;
-      color: #94a3b8;
+      background: #2e7d32;
+      color: #ffffff;
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.65rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 0 #1b5e20;
+    }
+
+    .btn-primary:hover {
+      background: #388e3c;
+      box-shadow: 0 4px 0 #1b5e20, 0 0 15px rgba(85, 255, 85, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #1b5e20;
+    }
+
+    .btn-cancel {
+      padding: 10px;
+      background: transparent;
+      color: #888888;
+      border: none;
+      cursor: pointer;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
       transition: all 0.2s ease;
     }
+
     .btn-cancel:hover {
-      color: #f87171;
-      background: rgba(239, 68, 68, 0.1);
+      color: #ff5555;
     }
 
     @media (max-width: 600px) {
       .admin-btn { top: 16px; right: 16px; }
       .code-container { gap: 14px; }
-      .card { width: 125px; height: 125px; padding: 16px; }
-      .card img { width: 68px; height: 68px; }
+      .card { width: 120px; height: 120px; padding: 14px; }
+      .card img { width: 64px; height: 64px; }
     }
   </style>
 </head>
 <body>
 
-  <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
+  <button class="admin-btn" onclick="openAdminModal()">⚙ ADMIN</button>
 
-  <div class="header-container">
-    <div class="badge">LIVE CODE</div>
-    <h1>MINECRAFT JOIN CODE</h1>
-  </div>
+  <h1>MINECRAFT JOIN CODE</h1>
 
   <div class="code-container" id="join-code"></div>
 
@@ -258,33 +253,33 @@
       <!-- STEP 1: Enter PIN -->
       <div id="step-pin">
         <div class="modal-header">
-          <h2>Admin Access</h2>
-          <p>Enter your PIN to edit the code</p>
+          <h2>ADMIN ACCESS</h2>
+          <p>ENTER PIN TO EDIT CODE</p>
         </div>
         <div class="input-group" style="margin-top: 16px;">
-          <input type="password" id="admin-pin" placeholder="Enter PIN">
+          <input type="password" id="admin-pin" placeholder="PIN">
         </div>
         <div class="modal-actions">
-          <button class="btn-primary" onclick="verifyPin()">Unlock</button>
-          <button class="btn-cancel" onclick="closeAdminModal()">Cancel</button>
+          <button class="btn-primary" onclick="verifyPin()">UNLOCK</button>
+          <button class="btn-cancel" onclick="closeAdminModal()">CANCEL</button>
         </div>
       </div>
 
       <!-- STEP 2: Edit Symbols -->
       <div id="step-edit" style="display: none;">
         <div class="modal-header">
-          <h2>Update Icons</h2>
-          <p>Enter new image filenames</p>
+          <h2>UPDATE ICONS</h2>
+          <p>ENTER IMAGE FILENAMES</p>
         </div>
         <div class="input-group" style="margin-top: 14px;">
-          <input type="text" id="icon1" placeholder="Icon 1 (e.g. Apple)">
-          <input type="text" id="icon2" placeholder="Icon 2 (e.g. Map)">
-          <input type="text" id="icon3" placeholder="Icon 3 (e.g. Potion)">
-          <input type="text" id="icon4" placeholder="Icon 4 (e.g. Sign)">
+          <input type="text" id="icon1" placeholder="ICON 1">
+          <input type="text" id="icon2" placeholder="ICON 2">
+          <input type="text" id="icon3" placeholder="ICON 3">
+          <input type="text" id="icon4" placeholder="ICON 4">
         </div>
         <div class="modal-actions">
-          <button class="btn-primary" onclick="saveSymbols()">Save Changes</button>
-          <button class="btn-cancel" onclick="closeAdminModal()">Cancel</button>
+          <button class="btn-primary" onclick="saveSymbols()">SAVE</button>
+          <button class="btn-cancel" onclick="closeAdminModal()">CANCEL</button>
         </div>
       </div>
 
@@ -308,7 +303,6 @@
     }
 
     function openAdminModal() {
-      // Reset view to PIN screen
       document.getElementById("step-pin").style.display = "block";
       document.getElementById("step-edit").style.display = "none";
       document.getElementById("admin-pin").value = "";
@@ -322,7 +316,6 @@
     function verifyPin() {
       const inputPin = document.getElementById("admin-pin").value;
       if (inputPin === PASSCODE) {
-        // Pre-fill existing symbols and show edit screen
         document.getElementById("icon1").value = todayCode[0] || "";
         document.getElementById("icon2").value = todayCode[1] || "";
         document.getElementById("icon3").value = todayCode[2] || "";
@@ -331,7 +324,7 @@
         document.getElementById("step-pin").style.display = "none";
         document.getElementById("step-edit").style.display = "block";
       } else {
-        alert("Incorrect PIN!");
+        alert("INCORRECT PIN!");
       }
     }
 
