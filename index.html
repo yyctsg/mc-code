@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minecraft Join Code</title>
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -290,11 +290,13 @@
 
   <div class="wrapper">
     <div class="top-bar">
+      <div class="logo-text">JOIN <span>CODE</span></div>
       <div class="logo-text">MINECRAFT <span>EDUCATION</span></div>
       <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
     </div>
 
     <div class="hud-display-case">
+      <h1>MINECRAFT JOIN CODE</h1>
       <h1>JOIN CODE</h1>
       <div class="hotbar-row" id="join-code"></div>
     </div>
@@ -303,7 +305,7 @@
   <!-- Admin Modal -->
   <div class="modal-overlay" id="admin-modal">
     <div class="modal-box">
-      
+
       <!-- STEP 1: PIN -->
       <div id="step-pin">
         <div class="modal-header">
@@ -325,45 +327,78 @@
           <h2>Configure Icons</h2>
           <p>Enter exact icon filenames</p>
         </div>
-        <!-- 🛠️ Restored exact layout inputs with autocorrect protections -->
         <div class="inputs-group" style="margin-top: 14px;">
-          <input type="text" id="slot-1" placeholder="Slot 1 (e.g. book)" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
-          <input type="text" id="slot-2" placeholder="Slot 2" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
-          <input type="text" id="slot-3" placeholder="Slot 3" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
-          <input type="text" id="slot-4" placeholder="Slot 4" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+          <input type="text" id="icon1" placeholder="Icon 1">
+          <input type="text" id="icon2" placeholder="Icon 2">
+          <input type="text" id="icon3" placeholder="Icon 3">
+          <input type="text" id="icon4" placeholder="Icon 4">
         </div>
         <div class="modal-buttons" style="margin-top: 14px;">
-          <button class="btn-save" onclick="saveJoinCode()">Save Changes</button>
-          <button class="btn-close" onclick="closeAdminModal()">Close</button>
+          <button class="btn-save" onclick="saveSymbols()">Save Changes</button>
+          <button class="btn-close" onclick="closeAdminModal()">Cancel</button>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- JAVASCRIPT SYSTEM LOGIC -->
   <script>
-    const SECURITY_PIN = "1234"; // Your original password variable name
-    
-    // Shortcut table mapping 'book' to the full string
-    const ICON_SHORTCUTS = {
-      'book': 'book and quill.png'
-    };
+    const PASSCODE = "bignuhtesh67";
+    let todayCode = JSON.parse(localStorage.getItem('mcCode')) || ["LLama", "Map", "Potion", "Sign"];
 
-    let currentSlots = ["book", "apple.png", "water_bucket.png", "diamond.png"]; // Your original array name
-
-    function renderHotbar() {
+    function renderCode() {
       const container = document.getElementById("join-code");
-      container.innerHTML = ""; 
+      container.innerHTML = "";
+      const cacheBuster = Date.now();
+      todayCode.forEach(iconName => {
+        container.innerHTML += `
+          <div class="slot-item">
+            <img src="${iconName}.png?v=${cacheBuster}" alt="${iconName}" onerror="this.onerror=null; this.src='Agent.png';">
+          </div>
+        `;
+      });
+    }
 
-      currentSlots.forEach(inputName => {
-        let cleanedInput = inputName.trim().toLowerCase();
+    function openAdminModal() {
+      document.getElementById("step-pin").style.display = "block";
+      document.getElementById("step-edit").style.display = "none";
+      document.getElementById("admin-pin").value = "";
+      document.getElementById("admin-modal").style.display = "flex";
+    }
 
-        // Use helper mapping table if exists
-        let actualFilename = ICON_SHORTCUTS[cleanedInput] || inputName;
+    function closeAdminModal() {
+      document.getElementById("admin-modal").style.display = "none";
+    }
 
-        if (!actualFilename.toLowerCase().endsWith('.png')) {
+    function verifyPin() {
+      const inputPin = document.getElementById("admin-pin").value;
+      if (inputPin === PASSCODE) {
+        document.getElementById("icon1").value = todayCode[0] || "";
+        document.getElementById("icon2").value = todayCode[1] || "";
+        document.getElementById("icon3").value = todayCode[2] || "";
+        document.getElementById("icon4").value = todayCode[3] || "";
 
-        img.src = actualFilename + "?t=" + new Date().getTime();
+        document.getElementById("step-pin").style.display = "none";
+        document.getElementById("step-edit").style.display = "block";
+      } else {
+        alert("Incorrect PIN!");
+      }
+    }
 
-        if (filename === 'book') { filename = 'book and quill.png'; }
+    function saveSymbols() {
+      todayCode = [
+        document.getElementById("icon1").value.trim(),
+        document.getElementById("icon2").value.trim(),
+        document.getElementById("icon3").value.trim(),
+        document.getElementById("icon4").value.trim()
+      ];
+      localStorage.setItem('mcCode', JSON.stringify(todayCode));
+      renderCode();
+      closeAdminModal();
+    }
+
+    renderCode();
+  </script>
+
+</body>
+</html>
