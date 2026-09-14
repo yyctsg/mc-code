@@ -6,7 +6,7 @@
   <title>MINECRAFT JOIN CODE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -14,12 +14,12 @@
       padding: 0;
     }
     body {
-      background: #080c14;
+      background: #0b0f19;
       background-image: 
-        radial-gradient(circle at 50% 40%, rgba(30, 90, 50, 0.25) 0%, transparent 70%),
-        radial-gradient(circle at 50% 100%, rgba(10, 20, 35, 0.8) 0%, transparent 100%);
+        radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.15) 0%, transparent 65%),
+        radial-gradient(circle at 50% 100%, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
       color: #ffffff;
-      font-family: 'Press Start 2P', monospace;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -36,20 +36,21 @@
       position: absolute;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(85, 255, 85, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(85, 255, 85, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
       background-size: 32px 32px;
       pointer-events: none;
     }
 
     h1 {
-      font-size: clamp(1.1rem, 4vw, 2rem);
-      line-height: 1.6;
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+      line-height: 1.5;
       text-align: center;
-      color: #55ff55;
-      text-shadow: 0 0 20px rgba(85, 255, 85, 0.4), 3px 3px 0px #00aa00;
-      margin-bottom: 40px;
-      letter-spacing: 1px;
+      color: #4ade80;
+      text-shadow: 0 0 25px rgba(74, 222, 128, 0.25);
+      margin-bottom: 36px;
+      letter-spacing: 0.5px;
       z-index: 1;
     }
 
@@ -65,28 +66,28 @@
       z-index: 1;
     }
 
-    /* Refined Glass Cards */
+    /* Modern Glass Cards */
     .card {
-      background: rgba(15, 23, 36, 0.45);
-      border: 2px solid rgba(85, 255, 85, 0.3);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 20px;
       padding: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(85, 255, 85, 0.05);
-      transition: all 0.25s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       width: 140px;
       height: 140px;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      border-color: #55ff55;
-      background: rgba(20, 32, 48, 0.6);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(85, 255, 85, 0.3);
+      border-color: rgba(74, 222, 128, 0.4);
+      background: rgba(20, 30, 50, 0.7);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(74, 222, 128, 0.15);
     }
 
     .card img {
@@ -94,31 +95,30 @@
       height: 76px;
       object-fit: contain;
       image-rendering: pixelated;
-      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5));
     }
 
     .admin-btn {
       position: absolute;
       top: 24px;
       right: 24px;
-      background: rgba(15, 23, 36, 0.6);
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      color: #aaaaaa;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.65rem;
-      padding: 10px 14px;
-      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 12px;
       cursor: pointer;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       transition: all 0.2s ease;
       z-index: 10;
     }
 
     .admin-btn:hover {
-      background: rgba(85, 255, 85, 0.15);
-      color: #55ff55;
-      border-color: #55ff55;
-      box-shadow: 0 0 15px rgba(85, 255, 85, 0.3);
+      background: rgba(74, 222, 128, 0.1);
+      color: #4ade80;
+      border-color: rgba(74, 222, 128, 0.3);
     }
 
     /* Modal Styling */
@@ -126,7 +126,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(4, 7, 12, 0.85);
+      background: rgba(3, 7, 18, 0.8);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       align-items: center;
@@ -136,98 +136,93 @@
     }
 
     .modal-content {
-      background: rgba(15, 23, 36, 0.95);
+      background: #0f172a;
       padding: 28px;
-      border-radius: 16px;
-      border: 2px solid rgba(85, 255, 85, 0.4);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       flex-direction: column;
       gap: 16px;
       width: 100%;
-      max-width: 360px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(85, 255, 85, 0.2);
+      max-width: 340px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
     }
 
     .modal-header h2 {
-      font-size: 0.85rem;
-      color: #55ff55;
-      line-height: 1.4;
-      text-transform: uppercase;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
     }
 
     .modal-header p {
-      font-size: 0.55rem;
-      color: #888888;
-      margin-top: 8px;
-      line-height: 1.5;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 4px;
     }
 
     .input-group {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .modal-content input {
-      padding: 12px;
-      background: rgba(5, 9, 15, 0.8);
-      border: 2px solid #1e293b;
+      padding: 12px 14px;
+      background: #020617;
+      border: 1px solid #1e293b;
       color: #ffffff;
-      border-radius: 8px;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.65rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
       outline: none;
       transition: all 0.2s ease;
     }
 
     .modal-content input:focus {
-      border-color: #55ff55;
-      box-shadow: 0 0 12px rgba(85, 255, 85, 0.3);
+      border-color: #4ade80;
+      box-shadow: 0 0 12px rgba(74, 222, 128, 0.15);
     }
 
     .modal-actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       margin-top: 6px;
     }
 
     .btn-primary {
       padding: 12px;
-      background: #2e7d32;
-      color: #ffffff;
+      background: #22c55e;
+      color: #022c22;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.65rem;
+      font-weight: 800;
+      font-size: 0.9rem;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 0 #1b5e20;
     }
 
     .btn-primary:hover {
-      background: #388e3c;
-      box-shadow: 0 4px 0 #1b5e20, 0 0 15px rgba(85, 255, 85, 0.4);
-    }
-
-    .btn-primary:active {
-      transform: translateY(2px);
-      box-shadow: 0 2px 0 #1b5e20;
+      background: #4ade80;
+      box-shadow: 0 0 15px rgba(74, 222, 128, 0.3);
     }
 
     .btn-cancel {
       padding: 10px;
       background: transparent;
-      color: #888888;
+      color: #64748b;
       border: none;
+      border-radius: 10px;
       cursor: pointer;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.55rem;
+      font-weight: 700;
+      font-size: 0.85rem;
       transition: all 0.2s ease;
     }
 
     .btn-cancel:hover {
-      color: #ff5555;
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.08);
     }
 
     @media (max-width: 600px) {
@@ -240,7 +235,7 @@
 </head>
 <body>
 
-  <button class="admin-btn" onclick="openAdminModal()">⚙ ADMIN</button>
+  <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
 
   <h1>MINECRAFT JOIN CODE</h1>
 
@@ -253,33 +248,33 @@
       <!-- STEP 1: Enter PIN -->
       <div id="step-pin">
         <div class="modal-header">
-          <h2>ADMIN ACCESS</h2>
-          <p>ENTER PIN TO EDIT CODE</p>
+          <h2>Admin Access</h2>
+          <p>Enter your PIN to edit the code</p>
         </div>
-        <div class="input-group" style="margin-top: 16px;">
-          <input type="password" id="admin-pin" placeholder="PIN">
+        <div class="input-group" style="margin-top: 14px;">
+          <input type="password" id="admin-pin" placeholder="Enter PIN">
         </div>
         <div class="modal-actions">
-          <button class="btn-primary" onclick="verifyPin()">UNLOCK</button>
-          <button class="btn-cancel" onclick="closeAdminModal()">CANCEL</button>
+          <button class="btn-primary" onclick="verifyPin()">Unlock</button>
+          <button class="btn-cancel" onclick="closeAdminModal()">Cancel</button>
         </div>
       </div>
 
       <!-- STEP 2: Edit Symbols -->
       <div id="step-edit" style="display: none;">
         <div class="modal-header">
-          <h2>UPDATE ICONS</h2>
-          <p>ENTER IMAGE FILENAMES</p>
+          <h2>Update Icons</h2>
+          <p>Enter image filenames</p>
         </div>
         <div class="input-group" style="margin-top: 14px;">
-          <input type="text" id="icon1" placeholder="ICON 1">
-          <input type="text" id="icon2" placeholder="ICON 2">
-          <input type="text" id="icon3" placeholder="ICON 3">
-          <input type="text" id="icon4" placeholder="ICON 4">
+          <input type="text" id="icon1" placeholder="Icon 1">
+          <input type="text" id="icon2" placeholder="Icon 2">
+          <input type="text" id="icon3" placeholder="Icon 3">
+          <input type="text" id="icon4" placeholder="Icon 4">
         </div>
         <div class="modal-actions">
-          <button class="btn-primary" onclick="saveSymbols()">SAVE</button>
-          <button class="btn-cancel" onclick="closeAdminModal()">CANCEL</button>
+          <button class="btn-primary" onclick="saveSymbols()">Save Changes</button>
+          <button class="btn-cancel" onclick="closeAdminModal()">Cancel</button>
         </div>
       </div>
 
@@ -293,10 +288,11 @@
     function renderCode() {
       const container = document.getElementById("join-code");
       container.innerHTML = "";
+      const cacheBuster = Date.now();
       todayCode.forEach(iconName => {
         container.innerHTML += `
           <div class="card">
-            <img src="${iconName}.png" alt="${iconName}" onerror="this.onerror=null; this.src='Agent.png';">
+            <img src="${iconName}.png?v=${cacheBuster}" alt="${iconName}" onerror="this.onerror=null; this.src='Agent.png';">
           </div>
         `;
       });
@@ -324,7 +320,7 @@
         document.getElementById("step-pin").style.display = "none";
         document.getElementById("step-edit").style.display = "block";
       } else {
-        alert("INCORRECT PIN!");
+        alert("Incorrect PIN!");
       }
     }
 
