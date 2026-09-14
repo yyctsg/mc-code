@@ -6,284 +6,352 @@
   <title>Minecraft Join Code</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
-      background: #121212;
+      background: #050608;
       background-image: 
-        radial-gradient(circle at 50% 20%, rgba(85, 255, 85, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 50% 90%, rgba(30, 30, 36, 0.9) 0%, transparent 100%);
-      color: #f3f4f6;
+        radial-gradient(circle at 50% 20%, rgba(34, 197, 94, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 50% 90%, rgba(10, 14, 23, 0.95) 0%, transparent 100%);
+      color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 24px;
+      padding: 30px 20px;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* Subtle Obsidian Grid */
+    /* Subtle immersive background vignette */
     body::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background: radial-gradient(circle at center, transparent 30%, rgba(3, 4, 7, 0.8) 90%);
       pointer-events: none;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    /* Top bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 8px;
+    }
+
+    .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #94a3b8;
+    }
+
+    .logo-text span {
+      color: #4ade80;
+      text-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+    }
+
+    .admin-btn {
+      background: #0d121f;
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      color: #4ade80;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .admin-btn:hover {
+      background: rgba(34, 197, 94, 0.15);
+      border-color: #4ade80;
+      box-shadow: 0 0 18px rgba(74, 222, 128, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* The Sleek HUD Inventory Case */
+    .hud-display-case {
+      background: rgba(13, 17, 26, 0.75);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 32px;
+      padding: 44px 36px;
+      width: 100%;
+      box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.8),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 0 50px rgba(34, 197, 94, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
     }
 
     h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
+      font-size: clamp(1.6rem, 3.8vw, 2.3rem);
+      font-weight: 900;
       text-align: center;
       color: #ffffff;
-      letter-spacing: -0.02em;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 20px rgba(85, 255, 85, 0.15);
-      margin-bottom: 40px;
-      z-index: 1;
+      letter-spacing: -0.03em;
+      text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
     }
 
-    .code-container {
+    /* 4-Slot Hotbar Grid Container */
+    .hotbar-row {
       display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+      gap: 16px;
       justify-content: center;
-      align-items: center;
-      max-width: 900px;
       width: 100%;
-      padding: 10px;
-      z-index: 1;
     }
 
-    /* Obsidian Glass Cards with Pixel-Art Border Vibe */
-    .card {
-      background: #1e1e24;
-      border: 2px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 20px;
+    /* Individual Custom Game Slot */
+    .slot-item {
+      background: #080b13;
+      border: 2px solid #1a2333;
+      border-radius: 20px;
+      width: 105px;
+      height: 105px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease, box-shadow 0.25s ease;
-      width: 140px;
-      height: 140px;
+      position: relative;
+      box-shadow: inset 0 6px 14px rgba(0, 0, 0, 0.9), 0 8px 20px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: #55ff55;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(85, 255, 85, 0.25);
+    .slot-item:hover {
+      border-color: #4ade80;
+      transform: translateY(-5px);
+      box-shadow: 
+        inset 0 4px 10px rgba(0, 0, 0, 0.6), 
+        0 15px 30px rgba(0, 0, 0, 0.6), 
+        0 0 25px rgba(74, 222, 128, 0.3);
     }
 
-    /* Uniform 90x90 Icons */
-    .card img {
+    .slot-item img {
       width: 90px;
       height: 90px;
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 82%;
+      max-height: 82%;
       object-fit: contain;
       image-rendering: pixelated;
-      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
-      transition: transform 0.25s ease;
+      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.8));
+      transition: transform 0.3s ease;
     }
 
-    .card:hover img {
-      transform: scale(1.05);
+    .slot-item:hover img {
+      transform: scale(1.1);
     }
 
-    .admin-btn {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      background: #1e1e24;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #9ca3af;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 10px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      transition: all 0.2s ease;
-      z-index: 10;
+    .hud-footer-note {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #64748b;
+      margin-top: 4px;
     }
 
-    .admin-btn:hover {
-      background: #282832;
-      color: #55ff55;
-      border-color: rgba(85, 255, 85, 0.4);
-      transform: translateY(-2px);
-    }
-
-    /* Modal Styling */
-    .modal {
+    /* Custom Immersive Modal */
+    .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(12, 12, 14, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(3, 4, 7, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       align-items: center;
       justify-content: center;
       padding: 20px;
       z-index: 100;
     }
 
-    .modal-content {
-      background: #1e1e24;
-      padding: 28px;
-      border-radius: 20px;
-      border: 1px solid rgba(85, 255, 85, 0.2);
+    .modal-box {
+      background: #0d121f;
+      border: 1.5px solid rgba(74, 222, 128, 0.3);
+      border-radius: 28px;
+      padding: 34px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(34, 197, 94, 0.12);
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      width: 100%;
-      max-width: 340px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(85, 255, 85, 0.1);
+      gap: 20px;
     }
 
     .modal-header h2 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: #ffffff;
     }
 
     .modal-header p {
       font-size: 0.85rem;
-      color: #9ca3af;
+      color: #94a3b8;
       margin-top: 4px;
     }
 
-    .input-group {
+    .inputs-group {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .modal-content input {
-      padding: 12px 14px;
-      background: #121212;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .modal-box input {
+      background: #060910;
+      border: 1px solid #1a2333;
       color: #ffffff;
-      border-radius: 10px;
+      padding: 13px 16px;
+      border-radius: 12px;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
       outline: none;
       transition: all 0.2s ease;
     }
 
-    .modal-content input:focus {
-      border-color: #55ff55;
-      box-shadow: 0 0 12px rgba(85, 255, 85, 0.25);
+    .modal-box input:focus {
+      border-color: #4ade80;
+      box-shadow: 0 0 15px rgba(74, 222, 128, 0.25);
     }
 
-    .modal-actions {
+    .modal-buttons {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-top: 6px;
+      gap: 10px;
+      margin-top: 4px;
     }
 
-    .btn-primary {
-      padding: 12px;
-      background: #166534;
-      color: #55ff55;
-      border: 1px solid rgba(85, 255, 85, 0.3);
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
+    .btn-save {
+      background: #22c55e;
+      color: #022c22;
+      border: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-weight: 800;
       font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .btn-primary:hover {
-      background: #15803d;
-      border-color: #55ff55;
-      box-shadow: 0 0 20px rgba(85, 255, 85, 0.35);
+    .btn-save:hover {
+      background: #4ade80;
+      box-shadow: 0 0 25px rgba(74, 222, 128, 0.5);
       transform: translateY(-1px);
     }
 
-    .btn-cancel {
-      padding: 10px;
+    .btn-close {
       background: transparent;
-      color: #9ca3af;
+      color: #94a3b8;
       border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
+      border-radius: 12px;
+      padding: 10px;
+      font-weight: 700;
       font-size: 0.85rem;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .btn-cancel:hover {
-      color: #f87171;
-      background: rgba(248, 113, 113, 0.08);
+    .btn-close:hover {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.08);
     }
 
-    @media (max-width: 600px) {
-      .admin-btn { top: 16px; right: 16px; }
-      .code-container { gap: 14px; }
-      .card { width: 125px; height: 125px; padding: 14px; }
-      .card img { width: 75px; height: 75px; }
+    @media (max-width: 520px) {
+      .hotbar-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        gap: 14px;
+      }
+      .slot-item {
+        width: 120px;
+        height: 120px;
+      }
+      .hud-display-case {
+        padding: 28px 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
+  <div class="wrapper">
+    <div class="top-bar">
+      <div class="logo-text">EDU <span>HUB</span></div>
+      <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
+    </div>
 
-  <h1>Minecraft Join Code</h1>
+    <div class="hud-display-case">
+      <h1>MINECRAFT JOIN CODE</h1>
+      
+      <div class="hotbar-row" id="join-code"></div>
 
-  <div class="code-container" id="join-code"></div>
+      <div class="hud-footer-note">Active Class Session</div>
+    </div>
+  </div>
 
   <!-- Admin Modal -->
-  <div class="modal" id="admin-modal">
-    <div class="modal-content">
+  <div class="modal-overlay" id="admin-modal">
+    <div class="modal-box">
       
-      <!-- STEP 1: Enter PIN -->
+      <!-- STEP 1: PIN -->
       <div id="step-pin">
         <div class="modal-header">
-          <h2>Admin Access</h2>
-          <p>Enter your PIN to edit the code</p>
+          <h2>Admin Authentication</h2>
+          <p>Enter security PIN to update session codes</p>
         </div>
-        <div class="input-group" style="margin-top: 14px;">
+        <div class="inputs-group" style="margin-top: 14px;">
           <input type="password" id="admin-pin" placeholder="Enter PIN">
         </div>
-        <div class="modal-actions">
-          <button class="btn-primary" onclick="verifyPin()">Unlock</button>
-          <button class="btn-cancel" onclick="closeAdminModal()">Cancel</button>
+        <div class="modal-buttons" style="margin-top: 14px;">
+          <button class="btn-save" onclick="verifyPin()">Unlock Panel</button>
+          <button class="btn-close" onclick="closeAdminModal()">Cancel</button>
         </div>
       </div>
 
-      <!-- STEP 2: Edit Symbols -->
+      <!-- STEP 2: Edit Form -->
       <div id="step-edit" style="display: none;">
         <div class="modal-header">
-          <h2>Update Icons</h2>
-          <p>Enter image filenames</p>
+          <h2>Configure Icons</h2>
+          <p>Enter exact icon filenames</p>
         </div>
-        <div class="input-group" style="margin-top: 14px;">
+        <div class="inputs-group" style="margin-top: 14px;">
           <input type="text" id="icon1" placeholder="Icon 1">
           <input type="text" id="icon2" placeholder="Icon 2">
           <input type="text" id="icon3" placeholder="Icon 3">
           <input type="text" id="icon4" placeholder="Icon 4">
         </div>
-        <div class="modal-actions">
-          <button class="btn-primary" onclick="saveSymbols()">Save Changes</button>
-          <button class="btn-cancel" onclick="closeAdminModal()">Cancel</button>
+        <div class="modal-buttons" style="margin-top: 14px;">
+          <button class="btn-save" onclick="saveSymbols()">Save & Broadcast</button>
+          <button class="btn-close" onclick="closeAdminModal()">Cancel</button>
         </div>
       </div>
 
@@ -300,7 +368,7 @@
       const cacheBuster = Date.now();
       todayCode.forEach(iconName => {
         container.innerHTML += `
-          <div class="card">
+          <div class="slot-item">
             <img src="${iconName}.png?v=${cacheBuster}" alt="${iconName}" onerror="this.onerror=null; this.src='Agent.png';">
           </div>
         `;
