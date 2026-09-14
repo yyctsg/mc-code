@@ -325,78 +325,41 @@
           <h2>Configure Icons</h2>
           <p>Enter exact icon filenames</p>
         </div>
+        <!-- 🛠️ Exact Changes Added: Inputs explicitly prevent autocorrect, spellcheck, & stabilization glitches -->
         <div class="inputs-group" style="margin-top: 14px;">
-          <input type="text" id="icon1" placeholder="Icon 1">
-          <input type="text" id="icon2" placeholder="Icon 2">
-          <input type="text" id="icon3" placeholder="Icon 3">
-          <input type="text" id="icon4" placeholder="Icon 4">
+          <input type="text" id="slot-1" placeholder="Slot 1 (e.g., book)" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+          <input type="text" id="slot-2" placeholder="Slot 2" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+          <input type="text" id="slot-3" placeholder="Slot 3" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+          <input type="text" id="slot-4" placeholder="Slot 4" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
         </div>
         <div class="modal-buttons" style="margin-top: 14px;">
-          <button class="btn-save" onclick="saveSymbols()">Save Changes</button>
-          <button class="btn-close" onclick="closeAdminModal()">Cancel</button>
+          <button class="btn-save" onclick="saveJoinCode()">Save & Update</button>
+          <button class="btn-close" onclick="closeAdminModal()">Close</button>
         </div>
       </div>
 
     </div>
   </div>
 
+  <!-- JAVASCRIPT SYSTEM -->
   <script>
-    const PASSCODE = "bignuhtesh67";
-    let todayCode = JSON.parse(localStorage.getItem('mcCode')) || ["LLama", "Map", "Potion", "Sign"];
+    // Shortcut dictionary maps simple input names to long filenames
+    const ICON_SHORTCUTS = {
+      'book': 'book and quill.png'
+    };
 
-    function renderCode() {
-      const container = document.getElementById("join-code");
-      container.innerHTML = "";
-      const cacheBuster = Date.now();
-      todayCode.forEach(iconName => {
-        container.innerHTML += `
-          <div class="slot-item">
-            <img src="${iconName}.png?v=${cacheBuster}" alt="${iconName}" onerror="this.onerror=null; this.src='Agent.png';">
-          </div>
-        `;
-      });
-    }
+    // Default configuration for your Minecraft slots
+    let currentCode = ["steve.png", "water bucket.png", "water bucket.png", "agent.png"];
+    const CORRECT_PIN = "bignuhtesh67"; 
 
-    function openAdminModal() {
-      document.getElementById("step-pin").style.display = "block";
-      document.getElementById("step-edit").style.display = "none";
-      document.getElementById("admin-pin").value = "";
-      document.getElementById("admin-modal").style.display = "flex";
-    }
+    // Render logic for UI generation
+    function renderHotbar() {
+      const container = document.getElementById('join-code');
+      container.innerHTML = '';
 
-    function closeAdminModal() {
-      document.getElementById("admin-modal").style.display = "none";
-    }
+      currentCode.forEach(filename => {
+        let inputName = filename.trim().toLowerCase();
+        
+        // Resolve target image asset
+        let actualFilename = ICON_SHORTCUTS[inputName] || filename;
 
-    function verifyPin() {
-      const inputPin = document.getElementById("admin-pin").value;
-      if (inputPin === PASSCODE) {
-        document.getElementById("icon1").value = todayCode[0] || "";
-        document.getElementById("icon2").value = todayCode[1] || "";
-        document.getElementById("icon3").value = todayCode[2] || "";
-        document.getElementById("icon4").value = todayCode[3] || "";
-
-        document.getElementById("step-pin").style.display = "none";
-        document.getElementById("step-edit").style.display = "block";
-      } else {
-        alert("Incorrect PIN!");
-      }
-    }
-
-    function saveSymbols() {
-      todayCode = [
-        document.getElementById("icon1").value.trim(),
-        document.getElementById("icon2").value.trim(),
-        document.getElementById("icon3").value.trim(),
-        document.getElementById("icon4").value.trim()
-      ];
-      localStorage.setItem('mcCode', JSON.stringify(todayCode));
-      renderCode();
-      closeAdminModal();
-    }
-
-    renderCode();
-  </script>
-
-</body>
-</html>
