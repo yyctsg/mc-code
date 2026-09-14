@@ -31,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* Subtle immersive background vignette */
     body::before {
       content: "";
       position: absolute;
@@ -51,7 +50,6 @@
       max-width: 580px;
     }
 
-    /* Top bar */
     .top-bar {
       display: flex;
       align-items: center;
@@ -93,7 +91,6 @@
       transform: translateY(-2px);
     }
 
-    /* The Sleek HUD Inventory Case */
     .hud-display-case {
       background: rgba(13, 17, 26, 0.75);
       border: 1px solid rgba(74, 222, 128, 0.2);
@@ -122,7 +119,6 @@
       text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
     }
 
-    /* 4-Slot Hotbar Grid Container */
     .hotbar-row {
       display: flex;
       gap: 16px;
@@ -130,7 +126,6 @@
       width: 100%;
     }
 
-    /* Individual Custom Game Slot */
     .slot-item {
       background: #080b13;
       border: 2px solid #1a2333;
@@ -169,16 +164,6 @@
       transform: scale(1.1);
     }
 
-    .hud-footer-note {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #64748b;
-      margin-top: 4px;
-    }
-
-    /* Custom Immersive Modal */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -305,16 +290,13 @@
 
   <div class="wrapper">
     <div class="top-bar">
-      <div class="logo-text">EDU <span>HUB</span></div>
+      <div class="logo-text">JOIN <span>CODE</span></div>
       <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
     </div>
 
     <div class="hud-display-case">
       <h1>MINECRAFT JOIN CODE</h1>
-      
       <div class="hotbar-row" id="join-code"></div>
-
-      <div class="hud-footer-note">Active Class Session</div>
     </div>
   </div>
 
@@ -350,7 +332,7 @@
           <input type="text" id="icon4" placeholder="Icon 4">
         </div>
         <div class="modal-buttons" style="margin-top: 14px;">
-          <button class="btn-save" onclick="saveSymbols()">Save & Broadcast</button>
+          <button class="btn-save" onclick="saveSymbols()">Save Changes</button>
           <button class="btn-close" onclick="closeAdminModal()">Cancel</button>
         </div>
       </div>
