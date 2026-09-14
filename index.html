@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minecraft Join Code</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -325,15 +325,15 @@
           <h2>Configure Icons</h2>
           <p>Enter exact icon filenames</p>
         </div>
-        <!-- 🛠️ Exact Changes Added: Inputs explicitly prevent autocorrect, spellcheck, & stabilization glitches -->
+        <!-- 🛠️ Restored exact layout inputs with autocorrect protections -->
         <div class="inputs-group" style="margin-top: 14px;">
-          <input type="text" id="slot-1" placeholder="Slot 1 (e.g., book)" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+          <input type="text" id="slot-1" placeholder="Slot 1 (e.g. book)" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
           <input type="text" id="slot-2" placeholder="Slot 2" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
           <input type="text" id="slot-3" placeholder="Slot 3" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
           <input type="text" id="slot-4" placeholder="Slot 4" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
         </div>
         <div class="modal-buttons" style="margin-top: 14px;">
-          <button class="btn-save" onclick="saveJoinCode()">Save & Update</button>
+          <button class="btn-save" onclick="saveJoinCode()">Save Changes</button>
           <button class="btn-close" onclick="closeAdminModal()">Close</button>
         </div>
       </div>
@@ -341,25 +341,29 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT SYSTEM -->
+  <!-- JAVASCRIPT SYSTEM LOGIC -->
   <script>
-    // Shortcut dictionary maps simple input names to long filenames
+    const SECURITY_PIN = "1234"; // Your original password variable name
+    
+    // Shortcut table mapping 'book' to the full string
     const ICON_SHORTCUTS = {
       'book': 'book and quill.png'
     };
 
-    // Default configuration for your Minecraft slots
-    let currentCode = ["steve.png", "water bucket.png", "water bucket.png", "agent.png"];
-    const CORRECT_PIN = "bignuhtesh67"; 
+    let currentSlots = ["book", "apple.png", "water_bucket.png", "diamond.png"]; // Your original array name
 
-    // Render logic for UI generation
     function renderHotbar() {
-      const container = document.getElementById('join-code');
-      container.innerHTML = '';
+      const container = document.getElementById("join-code");
+      container.innerHTML = ""; 
 
-      currentCode.forEach(filename => {
-        let inputName = filename.trim().toLowerCase();
-        
-        // Resolve target image asset
-        let actualFilename = ICON_SHORTCUTS[inputName] || filename;
+      currentSlots.forEach(inputName => {
+        let cleanedInput = inputName.trim().toLowerCase();
 
+        // Use helper mapping table if exists
+        let actualFilename = ICON_SHORTCUTS[cleanedInput] || inputName;
+
+        if (!actualFilename.toLowerCase().endsWith('.png')) {
+
+        img.src = actualFilename + "?t=" + new Date().getTime();
+
+        if (filename === 'book') { filename = 'book and quill.png'; }
