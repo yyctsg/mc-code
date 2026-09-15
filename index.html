@@ -291,7 +291,7 @@
   <div class="wrapper">
     <div class="top-bar">
       <div class="logo-text">MINECRAFT <span>EDUCATION</span></div>
-      <button class="admin-btn" onclick="openAdminModal()">⚙️ Admin</button>
+      <button class="admin-btn" id="open-admin-btn">⚙️ Admin</button>
     </div>
 
     <div class="hud-display-case">
@@ -314,8 +314,8 @@
           <input type="password" id="admin-pin" placeholder="Enter PIN">
         </div>
         <div class="modal-buttons" style="margin-top: 14px;">
-          <button class="btn-save" onclick="verifyPin()">Unlock Panel</button>
-          <button class="btn-close" onclick="closeAdminModal()">Cancel</button>
+          <button class="btn-save" id="verify-pin-btn">Unlock Panel</button>
+          <button class="btn-close close-modal-btn">Cancel</button>
         </div>
       </div>
 
@@ -323,7 +323,7 @@
       <div id="step-edit" style="display: none;">
         <div class="modal-header">
           <h2>Configure Icons</h2>
-          <p>Enter exact icon filenames</p>
+          <p>Enter icon names (e.g., Llama, Map, Potion)</p>
         </div>
         <div class="inputs-group" style="margin-top: 14px;">
           <input type="text" id="icon1" placeholder="Icon 1">
@@ -332,43 +332,94 @@
           <input type="text" id="icon4" placeholder="Icon 4">
         </div>
         <div class="modal-buttons" style="margin-top: 14px;">
-          <button class="btn-save" onclick="saveSymbols()">Save Changes</button>
-          <button class="btn-close" onclick="closeAdminModal()">Cancel</button>
+          <button class="btn-save" id="save-symbols-btn">Save Changes</button>
+          <button class="btn-close close-modal-btn">Cancel</button>
         </div>
       </div>
 
     </div>
   </div>
 
-  <script>
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDdeg9N_IguS_9_9AutZI3282pUZfwD0Mo",
+      authDomain: "mc-code.firebaseapp.com",
+      projectId: "mc-code",
+      storageBucket: "mc-code.firebasestorage.app",
+      messagingSenderId: "769180277878",
+      appId: "1:769180277878:web:f7809f65ca4aa2f3f9d357"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const codeDocRef = doc(db, "minecraft", "currentCode");
+
     const PASSCODE = "bignuhtesh67";
-    let todayCode = JSON.parse(localStorage.getItem('mcCode')) || ["LLama", "Map", "Potion", "Sign"];
+    let todayCode = ["Llama", "Map", "Potion", "Sign"];
+
+    // Cleans up user entry so it matches exact filenames
+    function formatIconName(str) {
+      if (!str) return "Agent";
+      let clean = str.trim();
+      // Remove trailing .png if typed
+      clean = clean.replace(/\.png$/i, "");
+      if (!clean) return "Agent";
+      // Capitalize first letter, lower case the rest (e.g. LLama -> Llama)
+      return clean.charAt(0).toUpperCase() + clean.slice(1).toLowerCase();
+    }
 
     function renderCode() {
       const container = document.getElementById("join-code");
       container.innerHTML = "";
-      const cacheBuster = Date.now();
-      todayCode.forEach(iconName => {
-        container.innerHTML += `
-          <div class="slot-item">
-            <img src="${iconName}.png?v=${cacheBuster}" alt="${iconName}" onerror="this.onerror=null; this.src='Agent.png';">
-          </div>
-        `;
+      
+      todayCode.forEach(rawName => {
+        const iconName = formatIconName(rawName);
+        const slot = document.createElement("div");
+        slot.className = "slot-item";
+        
+        const img = document.createElement("img");
+        img.src = `${iconName}.png`;
+        img.alt = iconName;
+
+        // Fallback if image doesn't exist
+        img.onerror = function() {
+          if (this.src.indexOf("Agent.png") === -1) {
+            this.src = "Agent.png";
+          }
+        };
+
+        slot.appendChild(img);
+        container.appendChild(slot);
       });
     }
 
-    function openAdminModal() {
+    // Real-time listener
+    onSnapshot(codeDocRef, (docSnap) => {
+      if (docSnap.exists() && docSnap.data().icons) {
+        todayCode = docSnap.data().icons;
+        renderCode();
+      }
+    });
+
+    // Event Listeners
+    document.getElementById("open-admin-btn").addEventListener("click", () => {
       document.getElementById("step-pin").style.display = "block";
       document.getElementById("step-edit").style.display = "none";
       document.getElementById("admin-pin").value = "";
       document.getElementById("admin-modal").style.display = "flex";
-    }
+    });
 
-    function closeAdminModal() {
-      document.getElementById("admin-modal").style.display = "none";
-    }
+    document.querySelectorAll(".close-modal-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("admin-modal").style.display = "none";
+      });
+    });
 
-    function verifyPin() {
+    document.getElementById("verify-pin-btn").addEventListener("click", () => {
       const inputPin = document.getElementById("admin-pin").value;
       if (inputPin === PASSCODE) {
         document.getElementById("icon1").value = todayCode[0] || "";
@@ -381,19 +432,24 @@
       } else {
         alert("Incorrect PIN!");
       }
-    }
+    });
 
-    function saveSymbols() {
+    document.getElementById("save-symbols-btn").addEventListener("click", async () => {
       todayCode = [
-        document.getElementById("icon1").value.trim(),
-        document.getElementById("icon2").value.trim(),
-        document.getElementById("icon3").value.trim(),
-        document.getElementById("icon4").value.trim()
+        formatIconName(document.getElementById("icon1").value),
+        formatIconName(document.getElementById("icon2").value),
+        formatIconName(document.getElementById("icon3").value),
+        formatIconName(document.getElementById("icon4").value)
       ];
-      localStorage.setItem('mcCode', JSON.stringify(todayCode));
-      renderCode();
-      closeAdminModal();
-    }
+
+      try {
+        await setDoc(codeDocRef, { icons: todayCode });
+        document.getElementById("admin-modal").style.display = "none";
+      } catch (e) {
+        console.error("Error saving code to Firebase: ", e);
+        alert("Failed to update Firebase. Check console for details.");
+      }
+    });
 
     renderCode();
   </script>
